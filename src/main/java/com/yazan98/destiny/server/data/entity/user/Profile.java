@@ -64,6 +64,10 @@ public class Profile implements UserDetails, Serializable, VortexBaseEntity {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @NonNull
+    @Column(name = "pin_code")
+    private String pinCode;
+
     @JsonIgnore
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
@@ -83,6 +87,23 @@ public class Profile implements UserDetails, Serializable, VortexBaseEntity {
         this.enabled = enabled;
         this.image = image;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPinCode() {
+        return pinCode;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPinCode(String pinCode) {
+        this.pinCode = pinCode;
     }
 
     public void setLocation(ProfileLocation location) {

@@ -55,8 +55,12 @@ public class Place implements Serializable , VortexBaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private PlaceDetails details;
 
-//    @ElementCollection
-//    private List<String> images = new ArrayList<String>();
+    @NonNull
+    @Column(name = "city_id")
+    private Long cityId;
+
+    @ElementCollection
+    private List<String> images = new ArrayList<String>();
 
     public Place() {
 
@@ -71,6 +75,22 @@ public class Place implements Serializable , VortexBaseEntity {
         this.status = status;
         this.km = km;
         this.details = details;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public Long getId() {
