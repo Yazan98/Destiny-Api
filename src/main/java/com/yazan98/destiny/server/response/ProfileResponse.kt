@@ -7,6 +7,7 @@ package com.yazan98.destiny.server.response
  */
 
 data class ProfileResponse(
+        var id: Long = 0,
         var username: String = "",
         var email: String = "",
         var phoneNumber: String = "",

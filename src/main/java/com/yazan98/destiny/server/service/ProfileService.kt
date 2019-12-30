@@ -1,19 +1,22 @@
 package com.yazan98.destiny.server.service
 
+import com.yazan98.destiny.server.body.PinCodeBody
+import com.yazan98.destiny.server.data.entity.phone.PhoneNumber
 import com.yazan98.destiny.server.data.entity.user.Profile
 import com.yazan98.destiny.server.data.repository.ProfileRepository
 import com.yazan98.destiny.server.error.AttrMissingDetails
 import com.yazan98.destiny.server.response.AuthResponse
+import com.yazan98.destiny.server.response.PinCodeResponse
 import com.yazan98.destiny.server.response.ProfileLocationResponse
 import com.yazan98.destiny.server.response.ProfileResponse
 import com.yazan98.destiny.server.utils.JwtTokenUtil
 import io.vortex.spring.boot.base.errors.EmptyErrorDetails
 import io.vortex.spring.boot.base.errors.VortexInvalidValueException
 import io.vortex.spring.boot.base.errors.VortexNotFoundException
-import io.vortex.spring.boot.base.service.VortexMysqlService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import java.util.*
 
 /**
  * Created By : Yazan Tarifi
@@ -23,8 +26,10 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-open class ProfileService @Autowired constructor(private val repo: ProfileRepository , private val tokenUtils: JwtTokenUtil?)
-    : BaseService<Long, Profile, ProfileRepository>() {
+open class ProfileService @Autowired constructor(
+        private val repo: ProfileRepository
+) : BaseService<Long, Profile, ProfileRepository>() {
+
     override fun create(entity: Profile): Profile {
         when {
             entity.image.isEmpty() -> throw VortexInvalidValueException("User Image Required", AttrMissingDetails("Image", "Attribute Missing"))
@@ -34,8 +39,8 @@ open class ProfileService @Autowired constructor(private val repo: ProfileReposi
             entity.phoneNumber.isEmpty() -> throw VortexInvalidValueException("User PhoneNumber Required", AttrMissingDetails("PhoneNumber", "Attribute Missing"))
             entity.password.length < 8 -> throw VortexInvalidValueException("User Password Must Be 8 At Minimum", AttrMissingDetails("Password", "Validation"))
             else -> {
+                entity.accountStatus = "NOT_ACTIVATED"
                 getRepository().save(entity)
-                println("ID : ${entity.id}")
             }
         }
         return getEntityById(entity.id)
@@ -50,11 +55,22 @@ open class ProfileService @Autowired constructor(private val repo: ProfileReposi
         }
     }
 
+    fun validateCode(body: PinCodeBody ,phoneNumberService: PhoneNumberService): PinCodeResponse {
+        val result = phoneNumberService.varifyPinCode(body.pinCode, body.userId)
+        if (result.status.equals("ACTIVATED")) {
+            val user = getRepository().findById(body.userId).get()
+            user.accountStatus = "ACTIVATED"
+            getRepository().save(user)
+        }
+        return result
+    }
+
     fun createNewAccount(content: Profile): AuthResponse {
         val result = create(content)
         return AuthResponse(
                 "Bearer ${JwtTokenUtil().generateToken(result)}",
                 ProfileResponse(
+                        id = result.id,
                         username = result.username,
                         image = result.image,
                         accountStatus = result.accountStatus,
@@ -64,6 +80,22 @@ open class ProfileService @Autowired constructor(private val repo: ProfileReposi
                         phoneNumber = result.phoneNumber
                 )
         )
+    }
+
+    fun createPinCode(id: Long , phoneNumberService: PhoneNumberService) {
+        phoneNumberService.create(PhoneNumber(
+                id,
+                getGeneratedCode(),
+                "NOT_ACTIVATED"
+        ))
+    }
+
+    private fun getGeneratedCode(): String {
+        var code = ""
+        for (i in 0..3) {
+            code += Random().nextInt(9)
+        }
+        return code
     }
 
     override fun getRepository(): ProfileRepository {
