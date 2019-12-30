@@ -39,4 +39,10 @@ class RouteController @Autowired constructor(service: RouteService) :
         ))
     }
 
+    @ResponseBody
+    @RequestMapping(method = [RequestMethod.GET], value = ["/all"])
+    override fun getAll(): ResponseEntity<VortexResponse> {
+        return super.getAll()
+    }
+
 }

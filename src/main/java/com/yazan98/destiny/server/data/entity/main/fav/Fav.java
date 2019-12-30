@@ -1,22 +1,20 @@
-package com.yazan98.destiny.server.data.entity.main;
+package com.yazan98.destiny.server.data.entity.main.fav;
 
 import io.vortex.spring.boot.base.models.database.VortexBaseEntity;
 import lombok.NonNull;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created By : Yazan Tarifi
  * Date : 12/30/2019
- * Time : 6:49 PM
+ * Time : 7:01 PM
  */
 
 @Entity
-@Table(name = "places")
-public class Place implements Serializable , VortexBaseEntity {
+@Table(name = "fav")
+public class Fav implements Serializable , VortexBaseEntity {
 
     @Id
     @NonNull
@@ -52,25 +50,24 @@ public class Place implements Serializable , VortexBaseEntity {
     @Column(name = "km")
     private Double km;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private PlaceDetails details;
+    @NonNull
+    @Column(name = "place_id")
+    private Long placeId;
 
-//    @ElementCollection
-//    private List<String> images = new ArrayList<String>();
+    @NonNull
+    @Column(name = "user_id")
+    private Long userId;
 
-    public Place() {
+    public Fav() {
 
     }
 
-    public Place(@NonNull String name, @NonNull Long categoryId, @NonNull String image, @NonNull Float rate, @NonNull Long rates, @NonNull String status, @NonNull Double km, PlaceDetails details) {
-        this.name = name;
-        this.categoryId = categoryId;
-        this.image = image;
-        this.rate = rate;
-        this.rates = rates;
-        this.status = status;
-        this.km = km;
-        this.details = details;
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getId() {
@@ -137,11 +134,11 @@ public class Place implements Serializable , VortexBaseEntity {
         this.km = km;
     }
 
-    public PlaceDetails getDetails() {
-        return details;
+    public Long getPlaceId() {
+        return placeId;
     }
 
-    public void setDetails(PlaceDetails details) {
-        this.details = details;
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
     }
 }
