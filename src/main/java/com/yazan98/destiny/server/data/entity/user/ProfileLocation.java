@@ -23,6 +23,10 @@ public class ProfileLocation implements Serializable {
     private Long id;
 
     @NonNull
+    @Column(name = "name")
+    private String name;
+
+    @NonNull
     @Column(name = "latitude")
     private Double latitude;
 
@@ -35,6 +39,14 @@ public class ProfileLocation implements Serializable {
 
     public ProfileLocation() {
 
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Long getId() {

@@ -92,7 +92,7 @@ open class ProfileService @Autowired constructor(
                         accountStatus = result.accountStatus,
                         email = result.email,
                         enabled = result.enabled,
-                        location = ProfileLocationResponse(result.location.latitude, result.location.longitude),
+                        location = ProfileLocationResponse(result.location.latitude, result.location.longitude, result.location.name),
                         phoneNumber = result.phoneNumber
                 )
         )
@@ -127,7 +127,7 @@ open class ProfileService @Autowired constructor(
                         accountStatus = result.accountStatus,
                         email = result.email,
                         enabled = result.enabled,
-                        location = ProfileLocationResponse(result.location.latitude, result.location.longitude),
+                        location = ProfileLocationResponse(result.location.latitude, result.location.longitude, result.location.name),
                         phoneNumber = result.phoneNumber
                 )
         )

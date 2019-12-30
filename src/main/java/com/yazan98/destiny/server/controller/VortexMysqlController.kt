@@ -26,7 +26,7 @@ open class VortexMysqlController<E : VortexBaseEntity, ID, R : JpaRepository<E, 
 ) : Controller<E, ID , R> {
 
     @ResponseBody
-    @RequestMapping(method = [RequestMethod.POST], value = ["/"])
+    @RequestMapping(method = [RequestMethod.POST], value = [""])
     override fun save(@Valid @RequestBody content: E?): ResponseEntity<VortexResponse> {
         if (content == null) {
             throw VortexInvalidValueException("Body Required", BodyErrorDetails(
@@ -44,7 +44,7 @@ open class VortexMysqlController<E : VortexBaseEntity, ID, R : JpaRepository<E, 
     }
 
     @ResponseBody
-    @RequestMapping(method = [RequestMethod.PUT], value = ["/"])
+    @RequestMapping(method = [RequestMethod.PUT], value = [""])
     override fun update(@Valid @RequestBody content: E?): ResponseEntity<VortexResponse> {
         if (content == null) {
             throw VortexInvalidValueException("Body Required", BodyErrorDetails(
@@ -110,7 +110,7 @@ open class VortexMysqlController<E : VortexBaseEntity, ID, R : JpaRepository<E, 
     }
 
     @ResponseBody
-    @RequestMapping(method = [RequestMethod.GET], value = ["/"])
+    @RequestMapping(method = [RequestMethod.GET], value = [""])
     override fun getAll(): ResponseEntity<VortexResponse> {
         val result = getService().getAllEntities()
         return ResponseEntity.status(HttpStatus.OK).body(VortexListResponse(

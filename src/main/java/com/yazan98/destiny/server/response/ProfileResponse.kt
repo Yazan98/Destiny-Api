@@ -17,8 +17,8 @@ data class ProfileResponse(
         var location: ProfileLocationResponse
 )
 
-
 data class ProfileLocationResponse(
         val latitude: Double,
-        val longitude: Double
+        val longitude: Double,
+        val name: String
 )

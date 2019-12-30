@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest
  * Time : 4:18 AM
  */
 @ControllerAdvice
-open class DestinyErrorHandler {
+open class DestinyErrorHandler : VortexExceptionHandler() {
 
     @ExceptionHandler(PinCodeInvalidValue::class)
     fun handlePromoCode(request: HttpServletRequest, exception: PinCodeInvalidValue): ResponseEntity<VortexErrorResponse> {
