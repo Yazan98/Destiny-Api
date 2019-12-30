@@ -1,5 +1,7 @@
 package com.yazan98.destiny.server.data.entity.main;
 
+import com.google.common.base.Ticker;
+import com.yazan98.destiny.server.data.entity.Ticket;
 import lombok.NonNull;
 
 import javax.persistence.*;
@@ -30,6 +32,9 @@ public class PlaceDetails {
 
     @OneToOne
     private Place place;
+
+    @OneToOne
+    private Ticket ticket;
 
     public PlaceDetails() {
 

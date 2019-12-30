@@ -87,6 +87,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation "org.jsondoc:spring-boot-starter-jsondoc:1.2.22"
     implementation "org.jsondoc:jsondoc-ui-webjar:1.2.22"
+
 }
 
 dependencyManagement {
