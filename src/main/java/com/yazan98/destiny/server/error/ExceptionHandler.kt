@@ -8,5 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice
  * Date : 12/30/2019
  * Time : 4:18 AM
  */
-@ControllerAdvice
-open class ExceptionHandler : VortexExceptionHandler()
+//@ControllerAdvice
+//: VortexExceptionHandler()
+open class ExceptionHandler

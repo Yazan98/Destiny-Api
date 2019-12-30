@@ -1,6 +1,5 @@
 package com.yazan98.destiny.server.controller
 
-
 import com.yazan98.destiny.server.service.BaseService
 import io.vortex.spring.boot.base.errors.VortexInvalidValueException
 import io.vortex.spring.boot.base.errors.details.BodyErrorDetails
@@ -9,7 +8,7 @@ import io.vortex.spring.boot.base.response.VortexListResponse
 import io.vortex.spring.boot.base.response.VortexResponse
 import io.vortex.spring.boot.base.response.VortexSuccessResponse
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.data.mongodb.repository.MongoRepository
+import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Component
@@ -19,13 +18,12 @@ import javax.validation.Valid
 /**
  * Created By : Yazan Tarifi
  * Date : 12/30/2019
- * Time : 3:35 AM
+ * Time : 3:16 PM
  */
-
 @Component
-open class BaseController<E : VortexBaseEntity, ID, R : MongoRepository<E, ID>, S : BaseService<ID, E, R>> @Autowired constructor(
-        private val controller: BaseService<ID, E, R>
-) : BaseControllerImpl<E, ID, R, S> {
+open class VortexMysqlController<E : VortexBaseEntity, ID, R : JpaRepository<E, ID>, S : BaseService<ID, E, R>> @Autowired constructor(
+        private val controller: S
+) : Controller<E, ID , R> {
 
     @ResponseBody
     @RequestMapping(method = [RequestMethod.POST], value = ["/"])
@@ -125,7 +123,6 @@ open class BaseController<E : VortexBaseEntity, ID, R : MongoRepository<E, ID>, 
     }
 
     override fun getService(): S {
-        return controller as S
+        return controller
     }
-
 }

@@ -1,10 +1,8 @@
 package com.yazan98.destiny.server.data.entity.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.NonNull;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.persistence.*;
 
 import java.io.Serializable;
 import java.util.UUID;
@@ -15,29 +13,35 @@ import java.util.UUID;
  * Time : 3:27 AM
  */
 
-@Document(collection = "accounts_locations")
+@Entity
+@Table(name = "accounts_locations")
 public class ProfileLocation implements Serializable {
 
     @Id
-    private String id = UUID.randomUUID().toString();
+    @NonNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @NonNull
-    @Indexed(name = "latitude")
+    @Column(name = "latitude")
     private Double latitude;
 
     @NonNull
-    @Indexed(name = "longitude")
+    @Column(name = "longitude")
     private Double longitude;
+
+    @OneToOne
+    private Profile profile;
 
     public ProfileLocation() {
 
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
