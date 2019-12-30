@@ -164,3 +164,5 @@
 [30/Dec/2019:17:27:26 +0300] 192.168.1.7 "POST /v1/categories HTTP/1.1" 201 (15 ms)
 [30/Dec/2019:17:27:27 +0300] 192.168.1.7 "POST /v1/categories HTTP/1.1" 201 (10 ms)
 [30/Dec/2019:17:27:30 +0300] 192.168.1.7 "GET /v1/categories HTTP/1.1" 200 (24 ms)
+[30/Dec/2019:18:16:12 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 500 (1369 ms)
+[30/Dec/2019:18:16:33 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (101 ms)

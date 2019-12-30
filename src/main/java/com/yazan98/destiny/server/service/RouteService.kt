@@ -1,6 +1,6 @@
 package com.yazan98.destiny.server.service
 
-import com.yazan98.destiny.server.data.entity.route.Route
+import com.yazan98.destiny.server.data.entity.main.Route
 import com.yazan98.destiny.server.data.repository.RouteRepository
 import com.yazan98.destiny.server.error.AttrMissingDetails
 import io.vortex.spring.boot.base.errors.VortexInvalidValueException
