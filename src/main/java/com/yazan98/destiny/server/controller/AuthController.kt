@@ -1,5 +1,6 @@
 package com.yazan98.destiny.server.controller
 
+import com.yazan98.destiny.server.body.LoginBody
 import com.yazan98.destiny.server.body.PinCodeBody
 import com.yazan98.destiny.server.data.entity.user.Profile
 import com.yazan98.destiny.server.data.repository.ProfileRepository
@@ -29,7 +30,11 @@ class AuthController @Autowired constructor(service: ProfileService, private val
     @RequestMapping(value = ["/register"], method = [RequestMethod.POST])
     override fun save(@Valid @RequestBody content: Profile?): ResponseEntity<VortexResponse> {
         val profile = content?.let { getService().createNewAccount(it) }
-        profile?.user?.id?.let { getService().createPinCode(it, phoneNumberService) }
+        profile?.user?.id?.let {
+            val result = getService().createPinCode(it, phoneNumberService)
+            getService().sendMessage(profile.user.phoneNumber , result)
+        }
+
         return ResponseEntity.ok(VortexSuccessResponse(
                 HttpStatus.CREATED.value(),
                 "Account Created",
@@ -51,6 +56,18 @@ class AuthController @Autowired constructor(service: ProfileService, private val
         return ResponseEntity.ok(VortexSuccessResponse(
                 HttpStatus.OK.value(),
                 "Pin Code Validation",
+                "Success",
+                response
+        ))
+    }
+
+    @ResponseBody
+    @RequestMapping(value = ["/login"], method = [RequestMethod.POST])
+    fun login(@Valid @RequestBody body: LoginBody): ResponseEntity<VortexResponse> {
+        val response = getService().login(body)
+        return ResponseEntity.ok(VortexSuccessResponse(
+                HttpStatus.OK.value(),
+                "Data Found",
                 "Success",
                 response
         ))

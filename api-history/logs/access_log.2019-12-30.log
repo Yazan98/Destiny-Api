@@ -153,3 +153,5 @@
 [30/Dec/2019:16:42:56 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (703 ms)
 [30/Dec/2019:16:43:29 +0300] 192.168.1.7 "POST /v1/accounts/validate HTTP/1.1" 400 (61 ms)
 [30/Dec/2019:16:44:15 +0300] 192.168.1.7 "POST /v1/accounts/validate HTTP/1.1" 200 (40 ms)
+[30/Dec/2019:16:49:22 +0300] 192.168.1.7 "POST /v1/accounts/login HTTP/1.1" 500 (225 ms)
+[30/Dec/2019:16:49:36 +0300] 192.168.1.7 "POST /v1/accounts/login HTTP/1.1" 200 (457 ms)

@@ -1,6 +1,8 @@
 package com.yazan98.destiny.server.service
 
+import com.yazan98.destiny.server.body.LoginBody
 import com.yazan98.destiny.server.body.PinCodeBody
+import com.yazan98.destiny.server.config.MessageSenderConfiguration
 import com.yazan98.destiny.server.data.entity.phone.PhoneNumber
 import com.yazan98.destiny.server.data.entity.user.Profile
 import com.yazan98.destiny.server.data.repository.ProfileRepository
@@ -46,6 +48,20 @@ open class ProfileService @Autowired constructor(
         return getEntityById(entity.id)
     }
 
+    fun sendMessage(phoneNumber: String, pinCode: String) {
+        Thread(Runnable {
+            try {
+                MessageSenderConfiguration().sendSms(
+                        "Destiny Services",
+                        "Welcome To Destiny Services The Account Code is : $pinCode",
+                        phoneNumber
+                )
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }).start()
+    }
+
     override fun getEntityById(id: Long): Profile {
         try {
             return getRepository().findById(id).get()
@@ -55,7 +71,7 @@ open class ProfileService @Autowired constructor(
         }
     }
 
-    fun validateCode(body: PinCodeBody ,phoneNumberService: PhoneNumberService): PinCodeResponse {
+    fun validateCode(body: PinCodeBody, phoneNumberService: PhoneNumberService): PinCodeResponse {
         val result = phoneNumberService.varifyPinCode(body.pinCode, body.userId)
         if (result.status.equals("ACTIVATED")) {
             val user = getRepository().findById(body.userId).get()
@@ -82,12 +98,14 @@ open class ProfileService @Autowired constructor(
         )
     }
 
-    fun createPinCode(id: Long , phoneNumberService: PhoneNumberService) {
+    fun createPinCode(id: Long, phoneNumberService: PhoneNumberService): String {
+        val code = getGeneratedCode()
         phoneNumberService.create(PhoneNumber(
                 id,
-                getGeneratedCode(),
+                code,
                 "NOT_ACTIVATED"
         ))
+        return code
     }
 
     private fun getGeneratedCode(): String {
@@ -96,6 +114,23 @@ open class ProfileService @Autowired constructor(
             code += Random().nextInt(9)
         }
         return code
+    }
+
+    fun login(body: LoginBody): AuthResponse {
+        val result = getRepository().findByEmailAndPassword(body.email, body.password).get()
+        return AuthResponse(
+                "Bearer ${JwtTokenUtil().generateToken(result)}",
+                ProfileResponse(
+                        id = result.id,
+                        username = result.username,
+                        image = result.image,
+                        accountStatus = result.accountStatus,
+                        email = result.email,
+                        enabled = result.enabled,
+                        location = ProfileLocationResponse(result.location.latitude, result.location.longitude),
+                        phoneNumber = result.phoneNumber
+                )
+        )
     }
 
     override fun getRepository(): ProfileRepository {
