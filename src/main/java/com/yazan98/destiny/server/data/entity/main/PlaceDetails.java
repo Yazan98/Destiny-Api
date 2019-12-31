@@ -40,6 +40,11 @@ public class PlaceDetails {
 
     }
 
+    public PlaceDetails(@NonNull Double latitude, @NonNull Double longitude) {
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     public Long getId() {
         return id;
     }

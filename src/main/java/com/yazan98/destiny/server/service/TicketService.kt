@@ -1,6 +1,7 @@
 package com.yazan98.destiny.server.service
 
 import com.yazan98.destiny.server.data.entity.Ticket
+import com.yazan98.destiny.server.data.entity.main.PlaceDetails
 import com.yazan98.destiny.server.data.repository.TicketRepository
 import io.vortex.spring.boot.base.errors.EmptyErrorDetails
 import io.vortex.spring.boot.base.errors.VortexNotFoundException
@@ -22,6 +23,12 @@ open class TicketService @Autowired constructor(private val repo: TicketReposito
     override fun create(entity: Ticket): Ticket {
         getRepository().save(entity)
         return getEntityById(entity.id)
+    }
+
+    fun createNewTicket(ticket: Ticket , placeService: PlaceService): Ticket {
+        val placeDetails = placeService.getEntityById(ticket.placeId).details
+        ticket.details = placeDetails
+        return create(ticket)
     }
 
     fun getTicketsByUserId(id: Long): ArrayList<Ticket> {
