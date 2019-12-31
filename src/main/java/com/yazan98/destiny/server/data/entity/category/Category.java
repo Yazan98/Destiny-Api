@@ -17,7 +17,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "categories")
-@Proxy(lazy = false)
 public class Category implements Serializable, VortexBaseEntity {
 
     @Id
@@ -42,7 +41,7 @@ public class Category implements Serializable, VortexBaseEntity {
     private String description;
 
     @Column(name="images")
-    @ElementCollection(targetClass=String.class)
+    @ElementCollection(targetClass=String.class , fetch = FetchType.EAGER)
     private List<String> images;
 
     public Category() {

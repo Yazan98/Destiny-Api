@@ -28,7 +28,7 @@ open class CollectionService @Autowired constructor(private val repo: Collection
     fun getPromotedCollections(): ArrayList<Collection> {
         val result = ArrayList<Collection>()
         getAllEntities().forEach {
-            if (it.promoted) {
+            if (it.popular.equals("true")) {
                 result.add(it)
             }
         }

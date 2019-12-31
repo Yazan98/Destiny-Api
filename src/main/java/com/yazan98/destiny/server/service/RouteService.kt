@@ -32,7 +32,10 @@ open class RouteService @Autowired constructor(private val repo: RouteRepository
                     AttrMissingDetails("Places",
                             "Attribute Missing"))
 
-            else -> getEntityById(entity.id)
+            else -> {
+                getRepository().save(entity)
+                getEntityById(entity.id)
+            }
         }
     }
 

@@ -64,11 +64,4 @@ public class PlaceDetails {
         this.longitude = longitude;
     }
 
-    public Place getPlace() {
-        return place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
-    }
 }

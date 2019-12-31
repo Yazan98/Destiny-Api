@@ -59,7 +59,8 @@ public class Place implements Serializable , VortexBaseEntity {
     @Column(name = "city_id")
     private Long cityId;
 
-    @ElementCollection
+    @Column(name = "images")
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> images = new ArrayList<String>();
 
     public Place() {

@@ -1,6 +1,5 @@
 package com.yazan98.destiny.server.data.entity.main;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.vortex.spring.boot.base.models.database.VortexBaseEntity;
 import lombok.NonNull;
 
@@ -35,19 +34,11 @@ public class Collection implements Serializable , VortexBaseEntity {
     @Column(name = "exhibits")
     private Long exhibits;
 
-    @NonNull
-    @Column(name = "promoted")
-    private Boolean isPromoted;
+    @Column(name = "popular")
+    private String popular;
 
     public Collection() {
 
-    }
-
-    public Collection(@NonNull String image, @NonNull String name, @NonNull Long exhibits, @NonNull Boolean isPromoted) {
-        this.image = image;
-        this.name = name;
-        this.exhibits = exhibits;
-        this.isPromoted = isPromoted;
     }
 
     public Long getId() {
@@ -82,11 +73,11 @@ public class Collection implements Serializable , VortexBaseEntity {
         this.exhibits = exhibits;
     }
 
-    public Boolean getPromoted() {
-        return isPromoted;
+    public String getPopular() {
+        return popular;
     }
 
-    public void setPromoted(Boolean promoted) {
-        isPromoted = promoted;
+    public void setPopular(String popular) {
+        this.popular = popular;
     }
 }
