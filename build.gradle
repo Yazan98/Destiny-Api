@@ -3,6 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id 'org.jetbrains.kotlin.jvm' version '1.3.50'
     id 'java'
+    id 'war'
 }
 
 group = 'com.yazan98.destiny.server'
@@ -87,6 +88,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     implementation "org.jsondoc:spring-boot-starter-jsondoc:1.2.22"
     implementation "org.jsondoc:jsondoc-ui-webjar:1.2.22"
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 
 }
 
@@ -109,4 +111,24 @@ compileTestKotlin {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+}
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    classifier = 'boot'
+    requiresUnpack '**/destiny-server-*.jar'
+}
+
+bootJar {
+    mainClassName = 'com.yazan98.destiny.server.DestinyApplication'
+    manifest {
+        attributes 'Start-Class': 'com.yazan98.destiny.server.DestinyApplication'
+    }
+}
+
+springBoot {
+    mainClassName = 'com.yazan98.destiny.server.DestinyApplication'
 }

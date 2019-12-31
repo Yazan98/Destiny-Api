@@ -126,13 +126,6 @@ open class ProfileService @Autowired constructor(
         try {
             println("Profile Response : Body : $body")
             val result: Profile = getRepository().findByEmail(body.email)
-            println("""
-            Profile Response : ${result.email} , ${result.password}
-            Encoding Password : ${BCryptPasswordEncoder().encode(body.password)}
-            Reverse Password : ${BCryptPasswordEncoder().encode(result.password)}
-            Encryptor Matches Case 1 : ${BCryptPasswordEncoder().matches(body.password , result.password)}
-            Encryptor Matches Case 2 : ${BCryptPasswordEncoder().matches(body.password , BCryptPasswordEncoder().encode(result.password))}
-        """.trimIndent())
             if (BCryptPasswordEncoder().matches(body.password , result.password)) {
                 return AuthResponse(
                         "Bearer ${JwtTokenUtil().generateToken(result)}",
