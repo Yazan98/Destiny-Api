@@ -7,6 +7,7 @@ import com.yazan98.destiny.server.data.entity.phone.PhoneNumber
 import com.yazan98.destiny.server.data.entity.user.Profile
 import com.yazan98.destiny.server.data.repository.ProfileRepository
 import com.yazan98.destiny.server.error.AttrMissingDetails
+import com.yazan98.destiny.server.error.EmptyLoginDetails
 import com.yazan98.destiny.server.response.AuthResponse
 import com.yazan98.destiny.server.response.PinCodeResponse
 import com.yazan98.destiny.server.response.ProfileLocationResponse
@@ -16,6 +17,7 @@ import io.vortex.spring.boot.base.errors.EmptyErrorDetails
 import io.vortex.spring.boot.base.errors.VortexInvalidValueException
 import io.vortex.spring.boot.base.errors.VortexNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
@@ -29,7 +31,8 @@ import java.util.*
 @Service
 @Transactional
 open class ProfileService @Autowired constructor(
-        private val repo: ProfileRepository
+        private val repo: ProfileRepository,
+        private val encryptor: BCryptPasswordEncoder
 ) : BaseService<Long, Profile, ProfileRepository>() {
 
     override fun create(entity: Profile): Profile {
@@ -41,6 +44,9 @@ open class ProfileService @Autowired constructor(
             entity.phoneNumber.isEmpty() -> throw VortexInvalidValueException("User PhoneNumber Required", AttrMissingDetails("PhoneNumber", "Attribute Missing"))
             entity.password.length < 8 -> throw VortexInvalidValueException("User Password Must Be 8 At Minimum", AttrMissingDetails("Password", "Validation"))
             else -> {
+                val oldPassword = entity.password
+                entity.password = encryptor.encode(oldPassword)
+                println("The Profile Password : Dycrypted ${entity.password}")
                 entity.accountStatus = "NOT_ACTIVATED"
                 getRepository().save(entity)
             }
@@ -117,20 +123,45 @@ open class ProfileService @Autowired constructor(
     }
 
     fun login(body: LoginBody): AuthResponse {
-        val result = getRepository().findByEmailAndPassword(body.email, body.password).get()
-        return AuthResponse(
-                "Bearer ${JwtTokenUtil().generateToken(result)}",
-                ProfileResponse(
-                        id = result.id,
-                        username = result.username,
-                        image = result.image,
-                        accountStatus = result.accountStatus,
-                        email = result.email,
-                        enabled = result.enabled,
-                        location = ProfileLocationResponse(result.location.latitude, result.location.longitude, result.location.name),
-                        phoneNumber = result.phoneNumber
+        try {
+            println("Profile Response : Body : $body")
+            val result: Profile = getRepository().findByEmail(body.email)
+            println("""
+            Profile Response : ${result.email} , ${result.password}
+            Encoding Password : ${BCryptPasswordEncoder().encode(body.password)}
+            Reverse Password : ${BCryptPasswordEncoder().encode(result.password)}
+            Encryptor Matches Case 1 : ${BCryptPasswordEncoder().matches(body.password , result.password)}
+            Encryptor Matches Case 2 : ${BCryptPasswordEncoder().matches(body.password , BCryptPasswordEncoder().encode(result.password))}
+        """.trimIndent())
+            if (BCryptPasswordEncoder().matches(body.password , result.password)) {
+                return AuthResponse(
+                        "Bearer ${JwtTokenUtil().generateToken(result)}",
+                        ProfileResponse(
+                                id = result.id,
+                                username = result.username,
+                                image = result.image,
+                                accountStatus = result.accountStatus,
+                                email = result.email,
+                                enabled = result.enabled,
+                                location = ProfileLocationResponse(result.location.latitude, result.location.longitude, result.location.name),
+                                phoneNumber = result.phoneNumber
+                        )
                 )
-        )
+            } else {
+                throw VortexNotFoundException("Data Not Found", EmptyLoginDetails(
+                        body.email,
+                        body.password,
+                        "Bad Data"
+                ))
+            }
+        } catch (ex: java.lang.Exception) {
+            ex.printStackTrace()
+            throw VortexNotFoundException("Data Not Found", EmptyLoginDetails(
+                    body.email,
+                    body.password,
+                    "Bad Data"
+            ))
+        }
     }
 
     override fun getRepository(): ProfileRepository {

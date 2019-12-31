@@ -40,8 +40,7 @@ public class Profile implements UserDetails, Serializable, VortexBaseEntity {
     private String name;
 
     @NonNull
-    @Size(min = 8, max = 25, message = "Password Min 8 , Max 25")
-    @Column(name = "password")
+    @Column(name = "password" , length = 3000)
     private String password;
 
     @NonNull

@@ -18,6 +18,8 @@ public interface ProfileRepository extends JpaRepository<Profile , Long> {
 
     Optional<Profile> findByEmailAndPassword(String email , String password);
 
+    Profile findByEmail(String email);
+
     Optional<Profile> findByName(String name);
 
 }
