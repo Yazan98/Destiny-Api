@@ -1,3 +1,17 @@
+buildscript {      // Configuration for building
+    repositories {
+        jcenter()
+        mavenCentral()
+        maven {
+            url 'https://maven-central.storage.googleapis.com'
+        }
+    }
+    dependencies {
+        classpath 'com.google.cloud.tools:appengine-gradle-plugin:2.2.0'
+        classpath 'org.akhikhl.gretty:gretty:+'
+    }
+}
+
 plugins {
     id 'org.springframework.boot' version '2.2.1.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
@@ -5,6 +19,9 @@ plugins {
     id 'java'
     id 'war'
 }
+
+apply plugin: 'org.akhikhl.gretty'
+apply plugin: 'com.google.cloud.tools.appengine'
 
 group = 'com.yazan98.destiny.server'
 version = '0.0.2-SNAPSHOT'
@@ -25,6 +42,9 @@ repositories {
     maven { url 'https://repo.spring.io/milestone' }
     maven { url 'https://repo.spring.io/snapshot' }
     maven { url  "https://dl.bintray.com/yt98/Vortex" }
+    maven {
+        url 'https://maven-central.storage.googleapis.com'             // Google's mirror of Maven Central
+    }
 }
 
 ext {
@@ -91,6 +111,51 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     implementation 'com.google.firebase:firebase-admin:6.11.0'
 
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    providedCompile 'com.google.appengine:appengine:+'
+    compile 'com.google.appengine:appengine-api-1.0-sdk:+'  
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+
+    compile 'jstl:jstl:1.2'
+    testCompile 'junit:junit:4.12'
+    testCompile 'com.google.truth:truth:0.33'
+    testCompile 'org.mockito:mockito-all:1.10.19'
+
+    testCompile 'com.google.appengine:appengine-testing:+'
+    testCompile 'com.google.appengine:appengine-api-stubs:+'
+    testCompile 'com.google.appengine:appengine-tools-sdk:+'
+}
+
+appengineDeploy.dependsOn test
+appengineStage.dependsOn test
+
+test {
+    useJUnit()
+    testLogging.showStandardStreams = true
+    beforeTest { descriptor ->
+        logger.lifecycle("test: " + descriptor + "  Running")
+    }
+
+    onOutput { descriptor, event ->
+        logger.lifecycle("test: " + descriptor + ": " + event.message )
+    }
+    afterTest { descriptor, result ->
+        logger.lifecycle("test: " + descriptor + ": " + result )
+    }
+}
+
+gretty {
+    httpPort = 8080
+    contextPath = '/'
+    servletContainer = 'jetty9'  // What App Engine Flexible uses
+}
+
+// gradle appengineDeploy
+appengine {
+    deploy {   // deploy configuration
+        stopPreviousVersion = true  // default - stop the current version
+        promote = true              // default - & make this the current version
+    }
 }
 
 dependencyManagement {

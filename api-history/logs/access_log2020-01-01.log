@@ -76,3 +76,4 @@
 [01/Jan/2020:16:57:09 +0300] 0:0:0:0:0:0:0:1 "POST /v1/accounts/register HTTP/1.1" 500 (3362 ms)
 [01/Jan/2020:16:59:18 +0300] 0:0:0:0:0:0:0:1 "POST /v1/accounts/register HTTP/1.1" 500 (3397 ms)
 [01/Jan/2020:17:00:53 +0300] 0:0:0:0:0:0:0:1 "POST /v1/accounts/register HTTP/1.1" 500 (3349 ms)
+[01/Jan/2020:17:13:44 +0300] 0:0:0:0:0:0:0:1 "POST /v1/accounts/register HTTP/1.1" 200 (10108 ms)
