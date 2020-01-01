@@ -89,6 +89,7 @@ dependencies {
     implementation "org.jsondoc:spring-boot-starter-jsondoc:1.2.22"
     implementation "org.jsondoc:jsondoc-ui-webjar:1.2.22"
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    implementation 'com.google.firebase:firebase-admin:6.11.0'
 
 }
 

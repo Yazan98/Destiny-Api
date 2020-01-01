@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import com.yazan98.destiny.server.data.entity.user.Profile;
 import com.yazan98.destiny.server.service.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -48,8 +49,11 @@ public class JwtTokenUtil implements Serializable {
         return expiration.before(new Date());
     }
     //generate token for user
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(Profile userDetails) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("id" , userDetails.getId());
+        claims.put("status" , userDetails.getAccountStatus());
+        claims.put("name" , userDetails.getName());
         return doGenerateToken(claims, userDetails.getUsername());
     }
     //while creating the token -
