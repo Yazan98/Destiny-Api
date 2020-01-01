@@ -1,7 +1,9 @@
 package com.yazan98.destiny.server.config;
 
 import com.yazan98.destiny.server.data.entity.user.Profile;
+import com.yazan98.destiny.server.error.TokenErrorDetails;
 import com.yazan98.destiny.server.service.UserService;
+import com.yazan98.destiny.server.utils.JwtTokenUtil;
 import io.jsonwebtoken.*;
 import io.vortex.spring.boot.base.errors.ErrorDetails;
 import io.vortex.spring.boot.base.errors.VortexAuthException;
@@ -28,7 +30,7 @@ import java.util.List;
 public class JwtTokenProvider {
 
     private String secretKey = "YT98";
-    private long validityInMilliseconds = 1603177200000L;
+    private long validityInMilliseconds = new Date(2022 , 1 , 1).getTime();
     private final UserService userDetailsService;
 
     @Autowired
@@ -47,8 +49,8 @@ public class JwtTokenProvider {
         claims.put("typ" ,  "JWT");
         claims.put("name" , account.getUsername());
         claims.put("activated" , account.getEnabled());
-        claims.put("enabled" , account.isEnabled());
-        claims.put("expired" , account.isAccountNonExpired());
+        claims.put("enabled" , true);
+        claims.put("expired" , false);
 
         Date now = new Date();
         Date validity = new Date(now.getTime() + validityInMilliseconds);
@@ -67,24 +69,20 @@ public class JwtTokenProvider {
     }
 
     public String getUsername(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return new JwtTokenUtil().getUsernameFromToken(token);
+//        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     public String resolveToken(HttpServletRequest req) {
         String bearerToken = req.getHeader("Authorization");
         if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            return bearerToken.substring(7, bearerToken.length());
+            return bearerToken.substring(7);
         }
         return null;
     }
 
     public boolean validateToken(String token) throws VortexAuthException {
-        try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
-            return !claims.getBody().getExpiration().before(new Date());
-        } catch (JwtException | IllegalArgumentException e) {
-            throw new VortexAuthException("Expired or invalid JWT token" , new ErrorDetails() {});
-        }
+        return new JwtTokenUtil().validateToken(token , userDetailsService);
     }
 
 }

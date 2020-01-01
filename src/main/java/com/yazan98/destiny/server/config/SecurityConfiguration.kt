@@ -1,25 +1,20 @@
 package com.yazan98.destiny.server.config
 
 import com.yazan98.destiny.server.data.repository.ProfileRepository
-import io.vortex.spring.boot.base.config.security.VortexJwtConfigurer
-import io.vortex.spring.boot.base.config.security.VortexSecurityConfig
-import io.vortex.spring.boot.base.config.security.VortexTokenProvider
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
 import org.springframework.http.HttpMethod
 import org.springframework.security.authentication.AuthenticationManager
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.builders.WebSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
-import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer.JwtConfigurer
 import org.springframework.security.config.http.SessionCreationPolicy
-import org.springframework.web.cors.CorsConfiguration
-import org.springframework.web.cors.CorsConfigurationSource
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource
-import java.util.*
+
 
 /**
  * Created By : Yazan Tarifi
@@ -30,51 +25,38 @@ import java.util.*
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 @Order(1000)
-open class SecurityConfiguration @Autowired constructor(private val repo: ProfileRepository) : VortexSecurityConfig() {
+open class SecurityConfiguration @Autowired constructor(private val repo: JwtTokenProvider) : WebSecurityConfigurerAdapter() {
 
-//    override fun configWebSecurity(http: HttpSecurity) {
-//        http.httpBasic().disable()
-//                .csrf().disable()
-//                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//                .and()
-//                .authorizeRequests()
-//                .antMatchers(AUTH_WHITELIST[0]).permitAll()
-//                .antMatchers(AUTH_WHITELIST[1]).permitAll()
-//                .antMatchers(AUTH_WHITELIST[2]).permitAll()
-//                .antMatchers(AUTH_WHITELIST[3]).permitAll()
-//                .antMatchers(AUTH_WHITELIST[4]).permitAll()
-//                .antMatchers(AUTH_WHITELIST[5]).permitAll()
-//                .antMatchers(AUTH_WHITELIST[6]).permitAll()
-//                .antMatchers(HttpMethod.POST, "/v1/auth/register").permitAll()
-//                .antMatchers(HttpMethod.POST, "v1/auth/register/").permitAll()
-//                .antMatchers(HttpMethod.POST, "v1/auth").permitAll()
-//                .antMatchers("/").permitAll()
-//                .anyRequest().authenticated()
-//                .and()
-//                .apply(VortexJwtConfigurer(getTokenProvider()))
-//    }
-
-    override fun configWebSecurity(http: HttpSecurity) {
-
-    }
-
-    override fun configure(http: HttpSecurity?) {
-        http?.cors()?.and()?.csrf()?.disable()
-    }
+    private val AUTH_WHITELIST = arrayOf("/v2/api-docs",
+            "/swagger-resources", "/swagger-resources/**",
+            "/configuration/ui", "/configuration/security",
+            "/swagger-ui.html", "/webjars/**")
 
     @Bean
-    open fun corsConfigurationSource(): CorsConfigurationSource {
-        val configuration = CorsConfiguration()
-        configuration.allowedOrigins = Arrays.asList("*")
-        configuration.allowedMethods = listOf("*")
-        configuration.allowedHeaders = Arrays.asList("*")
-        configuration.allowCredentials = true
-        val source = UrlBasedCorsConfigurationSource()
-        source.registerCorsConfiguration("/**", configuration)
-        return source
+    @Throws(Exception::class)
+    override fun authenticationManagerBean(): AuthenticationManager {
+        return super.authenticationManagerBean()
     }
 
-    override fun getTokenProvider(): VortexTokenProvider<*> {
-        return TokenProvider(repo)
+    @Throws(Exception::class)
+    override fun configure(http: HttpSecurity) {
+        http
+                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.POST, "/v1/accounts/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/v1/accounts/login").permitAll()
+                .antMatchers(*AUTH_WHITELIST).permitAll()
+                .antMatchers("/").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .apply(JwtConfigurer(repo))
+    }
+
+    @Throws(Exception::class)
+    override fun configure(web: WebSecurity) {
+        web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources", "/configuration/security", "/swagger-ui.html", "/webjars/**")
     }
 }
