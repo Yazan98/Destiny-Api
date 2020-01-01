@@ -1,9 +1,11 @@
 package com.yazan98.destiny.server.service
 
+import com.google.firebase.database.FirebaseDatabase
 import com.yazan98.destiny.server.body.LoginBody
 import com.yazan98.destiny.server.body.PinCodeBody
 import com.yazan98.destiny.server.config.MessageSenderConfiguration
 import com.yazan98.destiny.server.data.entity.phone.PhoneNumber
+import com.yazan98.destiny.server.data.entity.user.CustomProfileSettings
 import com.yazan98.destiny.server.data.entity.user.Profile
 import com.yazan98.destiny.server.data.repository.ProfileRepository
 import com.yazan98.destiny.server.error.AttrMissingDetails
@@ -21,6 +23,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import java.util.*
+
 
 /**
  * Created By : Yazan Tarifi
@@ -48,10 +51,37 @@ open class ProfileService @Autowired constructor(
                 entity.password = encryptor.encode(oldPassword)
                 println("The Profile Password : Dycrypted ${entity.password}")
                 entity.accountStatus = "NOT_ACTIVATED"
+                createFirebaseAccount(entity)
                 getRepository().save(entity)
             }
         }
         return getEntityById(entity.id)
+    }
+
+    private fun createFirebaseAccount(profile: Profile) {
+        Thread(Runnable {
+            try {
+                val result = CustomProfileSettings(
+                        profile.name,
+                        profile.email,
+                        profile.password,
+                        profile.phoneNumber,
+                        profile.id,
+                        profile.accountStatus,
+                        profile.image,
+                        profile.pinCode
+                )
+                val database = FirebaseDatabase.getInstance()
+                val ref = database.getReference("server/saving-data")
+                val usersRef = ref.child("users")
+                val users = HashMap<String, CustomProfileSettings>()
+                users[profile.name] = result
+                usersRef.setValueAsync(users)
+            } catch (ex: Exception) {
+                println("There is Error At Create Profile In Database")
+                ex.printStackTrace()
+            }
+        }).start()
     }
 
     fun sendMessage(phoneNumber: String, pinCode: String) {
@@ -126,7 +156,7 @@ open class ProfileService @Autowired constructor(
         try {
             println("Profile Response : Body : $body")
             val result: Profile = getRepository().findByEmail(body.email)
-            if (BCryptPasswordEncoder().matches(body.password , result.password)) {
+            if (BCryptPasswordEncoder().matches(body.password, result.password)) {
                 return AuthResponse(
                         "Bearer ${JwtTokenUtil().generateToken(result)}",
                         ProfileResponse(

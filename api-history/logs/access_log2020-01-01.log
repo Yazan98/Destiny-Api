@@ -48,3 +48,8 @@
 [01/Jan/2020:13:21:51 +0300] 192.168.1.7 "GET /v1/categories/40 HTTP/1.1" 500 (93 ms)
 [01/Jan/2020:13:22:07 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (95 ms)
 [01/Jan/2020:13:22:15 +0300] 192.168.1.7 "GET /v1/categories/40 HTTP/1.1" 404 (55 ms)
+[01/Jan/2020:13:42:37 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (812 ms)
+[01/Jan/2020:13:42:49 +0300] 192.168.1.7 "POST /v1/notifications/offer HTTP/1.1" 200 (1634 ms)
+[01/Jan/2020:13:53:22 +0300] 192.168.1.7 "POST /v1/notifications/offer HTTP/1.1" 200 (2107 ms)
+[01/Jan/2020:13:53:27 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (226 ms)
+[01/Jan/2020:13:56:36 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (813 ms)
