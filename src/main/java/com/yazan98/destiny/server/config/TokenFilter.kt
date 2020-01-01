@@ -1,18 +1,17 @@
 package com.yazan98.destiny.server.config
 
-import com.yazan98.destiny.server.data.repository.ProfileRepository
-import io.vortex.spring.boot.base.config.security.VortexJwtTokenFilter
+import com.yazan98.destiny.server.error.TokenErrorDetails
+import io.vortex.spring.boot.base.errors.VortexAuthException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
-import org.springframework.web.filter.GenericFilterBean
 import org.springframework.security.core.context.SecurityContextHolder
-import javax.servlet.http.HttpServletRequest
-import javax.servlet.ServletException
+import org.springframework.web.filter.GenericFilterBean
 import java.io.IOException
 import javax.servlet.FilterChain
-import javax.servlet.ServletResponse
+import javax.servlet.ServletException
 import javax.servlet.ServletRequest
-
+import javax.servlet.ServletResponse
+import javax.servlet.http.HttpServletRequest
 
 
 /**

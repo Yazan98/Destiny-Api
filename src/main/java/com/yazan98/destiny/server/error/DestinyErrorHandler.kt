@@ -1,6 +1,7 @@
 package com.yazan98.destiny.server.error
 
 import io.vortex.spring.boot.base.errors.ErrorDetails
+import io.vortex.spring.boot.base.errors.VortexAuthException
 import io.vortex.spring.boot.base.errors.VortexExceptionHandler
 import io.vortex.spring.boot.base.response.VortexError
 import io.vortex.spring.boot.base.response.VortexErrorResponse
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.ControllerAdvice
 import org.springframework.web.bind.annotation.ExceptionHandler
+import javax.servlet.ServletException
 import javax.servlet.http.HttpServletRequest
 
 /**
@@ -50,6 +52,23 @@ open class DestinyErrorHandler : VortexExceptionHandler() {
                         )
                 ),
                 HttpStatus.NOT_FOUND
+        )
+    }
+
+    @ExceptionHandler(ServletException::class)
+    fun handleAuthrization(request: HttpServletRequest, exception: ServletException): ResponseEntity<VortexErrorResponse> {
+        return ResponseEntity(
+                VortexErrorResponse(
+                        code = HttpStatus.UNAUTHORIZED.value(),
+                        message = exception.message,
+                        path = request.pathInfo,
+                        error = VortexError(
+                                "Invalid Or Missing Token",
+                                NoSuchException("No Result From Attached Token Or There is No Token"),
+                                exception.stackTrace
+                        )
+                ),
+                HttpStatus.UNAUTHORIZED
         )
     }
 
