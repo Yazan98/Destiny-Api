@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.web.filter.GenericFilterBean
 import org.springframework.security.core.context.SecurityContextHolder
 import javax.servlet.http.HttpServletRequest
-import com.sun.xml.internal.ws.policy.sourcemodel.wspolicy.XmlToken.resolveToken
 import javax.servlet.ServletException
 import java.io.IOException
 import javax.servlet.FilterChain

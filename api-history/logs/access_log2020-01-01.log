@@ -53,3 +53,4 @@
 [01/Jan/2020:13:53:22 +0300] 192.168.1.7 "POST /v1/notifications/offer HTTP/1.1" 200 (2107 ms)
 [01/Jan/2020:13:53:27 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (226 ms)
 [01/Jan/2020:13:56:36 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (813 ms)
+[01/Jan/2020:13:58:06 +0300] 192.168.1.7 "POST /v1/accounts/register HTTP/1.1" 200 (631 ms)

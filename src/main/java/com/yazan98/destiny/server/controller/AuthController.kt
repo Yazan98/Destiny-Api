@@ -2,6 +2,7 @@ package com.yazan98.destiny.server.controller
 
 import com.yazan98.destiny.server.body.LoginBody
 import com.yazan98.destiny.server.body.PinCodeBody
+import com.yazan98.destiny.server.body.UpdatePasswordBody
 import com.yazan98.destiny.server.data.entity.user.Profile
 import com.yazan98.destiny.server.data.repository.ProfileRepository
 import com.yazan98.destiny.server.service.PhoneNumberService
@@ -68,6 +69,18 @@ class AuthController @Autowired constructor(service: ProfileService, private val
         return ResponseEntity.ok(VortexSuccessResponse(
                 HttpStatus.OK.value(),
                 "Data Found",
+                "Success",
+                response
+        ))
+    }
+
+    @ResponseBody
+    @RequestMapping(value = ["/password"], method = [RequestMethod.PUT])
+    fun updatePassword(@Valid @RequestBody body: UpdatePasswordBody): ResponseEntity<VortexResponse> {
+        val response = getService().updatePassword(body)
+        return ResponseEntity.ok(VortexSuccessResponse(
+                HttpStatus.OK.value(),
+                "Password Updated",
                 "Success",
                 response
         ))

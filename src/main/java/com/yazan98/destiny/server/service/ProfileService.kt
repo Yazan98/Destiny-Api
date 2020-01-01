@@ -3,6 +3,7 @@ package com.yazan98.destiny.server.service
 import com.google.firebase.database.FirebaseDatabase
 import com.yazan98.destiny.server.body.LoginBody
 import com.yazan98.destiny.server.body.PinCodeBody
+import com.yazan98.destiny.server.body.UpdatePasswordBody
 import com.yazan98.destiny.server.config.MessageSenderConfiguration
 import com.yazan98.destiny.server.data.entity.phone.PhoneNumber
 import com.yazan98.destiny.server.data.entity.user.CustomProfileSettings
@@ -184,6 +185,27 @@ open class ProfileService @Autowired constructor(
                     body.password,
                     "Bad Data"
             ))
+        }
+    }
+
+    fun updatePassword(body: UpdatePasswordBody) : ProfileResponse {
+        val result = getRepository().findById(body.id).get()
+        if (BCryptPasswordEncoder().matches(body.oldPassword, result.password)) {
+            result.password = BCryptPasswordEncoder().encode(body.newPassword)
+            getRepository().save(result)
+            return ProfileResponse(
+                    id = result.id,
+                    username = result.username,
+                    image = result.image,
+                    accountStatus = result.accountStatus,
+                    email = result.email,
+                    enabled = result.enabled,
+                    location = ProfileLocationResponse(result.location.latitude, result.location.longitude, result.location.name),
+                    phoneNumber = result.phoneNumber
+            )
+        } else {
+            throw VortexInvalidValueException("Password Invalid Value", AttrMissingDetails("Old Password",
+                    "The Password Attached Not Valid"))
         }
     }
 
