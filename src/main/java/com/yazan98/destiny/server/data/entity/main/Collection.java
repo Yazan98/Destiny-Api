@@ -41,6 +41,13 @@ public class Collection implements Serializable , VortexBaseEntity {
 
     }
 
+    public Collection(String image, String name, Long exhibits, String popular) {
+        this.image = image;
+        this.exhibits = exhibits;
+        this.name = name;
+        this.popular = popular;
+    }
+
     public Long getId() {
         return id;
     }

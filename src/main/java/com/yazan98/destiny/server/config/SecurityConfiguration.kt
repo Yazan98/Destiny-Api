@@ -48,6 +48,7 @@ open class SecurityConfiguration @Autowired constructor(private val repo: JwtTok
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/v1/accounts/register").permitAll()
                 .antMatchers(HttpMethod.POST, "/v1/accounts/login").permitAll()
+                .antMatchers(HttpMethod.GET, "/v1/collections/all").permitAll()
                 .antMatchers(*AUTH_WHITELIST).permitAll()
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()

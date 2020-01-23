@@ -78,7 +78,7 @@ public class Profile implements UserDetails, Serializable, VortexBaseEntity {
 
     }
 
-    public Profile(String id, @NonNull String username, @NonNull @Size(min = 8, max = 25, message = "Password Min 8 , Max 25") String password, @NonNull @Email String email, @NonNull String accountStatus, @NonNull Boolean enabled, @NonNull String image, @NonNull String phoneNumber) {
+    public Profile(@NonNull String username, @NonNull @Size(min = 8, max = 25, message = "Password Min 8 , Max 25") String password, @NonNull @Email String email, @NonNull String accountStatus, @NonNull Boolean enabled, @NonNull String image, @NonNull String phoneNumber) {
         this.name = username;
         this.password = password;
         this.email = email;
