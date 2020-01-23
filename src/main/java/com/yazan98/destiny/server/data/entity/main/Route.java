@@ -42,6 +42,13 @@ public class Route implements Serializable , VortexBaseEntity {
 
     }
 
+    public Route(String image, String name, Long places, String type) {
+        this.image = image;
+        this.name = name;
+        this.places = places;
+        this.type = type;
+    }
+
     public String getType() {
         return type;
     }

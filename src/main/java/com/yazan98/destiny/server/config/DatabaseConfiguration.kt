@@ -2,10 +2,12 @@ package com.yazan98.destiny.server.config
 
 import com.yazan98.destiny.server.data.entity.category.Category
 import com.yazan98.destiny.server.data.entity.main.Collection
+import com.yazan98.destiny.server.data.entity.main.Route
 import com.yazan98.destiny.server.data.entity.user.Profile
 import com.yazan98.destiny.server.data.repository.CategoryRepository
 import com.yazan98.destiny.server.data.repository.CollectionRepository
 import com.yazan98.destiny.server.data.repository.ProfileRepository
+import com.yazan98.destiny.server.data.repository.RouteRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -14,7 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 open class DatabaseConfiguration @Autowired constructor(
         userRepository: ProfileRepository,
         collectionRepository: CollectionRepository,
-        categoryRepository: CategoryRepository
+        categoryRepository: CategoryRepository,
+        routsRepository: RouteRepository
 ) {
 
     init {
@@ -96,6 +99,34 @@ open class DatabaseConfiguration @Autowired constructor(
         categoryRepository.save(Category(
                 "Places",
                 "https://firebasestorage.googleapis.com/v0/b/culttrip-7da07.appspot.com/o/icons%2Fplace%20(1).png?alt=media&token=c2b4d770-e3ff-4980-8432-7f13ae53d962"
+        ))
+
+        routsRepository.save(Route(
+                "https://firebasestorage.googleapis.com/v0/b/culttrip-7da07.appspot.com/o/routs%2FNew%20Project%20(2).jpg?alt=media&token=df4d4bc8-5e88-4f9d-825f-d2a5afa5c222",
+                "Paris",
+                351,
+                ""
+        ))
+
+        routsRepository.save(Route(
+                "https://firebasestorage.googleapis.com/v0/b/culttrip-7da07.appspot.com/o/routs%2FNew%20Project%20(1).jpg?alt=media&token=09f5ee66-1942-40b2-ac3f-193e0654d76e",
+                "New York",
+                50,
+                ""
+        ))
+
+        routsRepository.save(Route(
+                "https://firebasestorage.googleapis.com/v0/b/culttrip-7da07.appspot.com/o/routs%2FNew%20Project%20(3).jpg?alt=media&token=21bf2ed8-2a1c-4e3a-97a1-dea21a3ce60d",
+                "Rome",
+                184,
+                ""
+        ))
+
+        routsRepository.save(Route(
+                "https://firebasestorage.googleapis.com/v0/b/culttrip-7da07.appspot.com/o/routs%2FNew%20Project%20(4).jpg?alt=media&token=470867d1-75f9-4cf0-aa0f-c0f134ee7ab3",
+                "Jordan",
+                154,
+                ""
         ))
 
     }

@@ -33,3 +33,8 @@
 [23/Jan/2020:13:22:54 +0000] 192.168.1.3 "GET /v1/collections/all HTTP/1.1" 200 (15 ms)
 [23/Jan/2020:13:53:37 +0000] 192.168.1.5 "POST /v1/accounts/login HTTP/1.1" 404 (307 ms)
 [23/Jan/2020:13:53:51 +0000] 192.168.1.5 "POST /v1/accounts/login HTTP/1.1" 404 (12 ms)
+[23/Jan/2020:13:56:03 +0000] 192.168.1.5 "POST /v1/accounts/login HTTP/1.1" 404 (711 ms)
+[23/Jan/2020:13:56:34 +0000] 192.168.1.5 "POST /v1/accounts/register HTTP/1.1" 200 (229 ms)
+[23/Jan/2020:13:56:45 +0000] 192.168.1.5 "GET /v1/categories HTTP/1.1" 200 (69 ms)
+[23/Jan/2020:13:56:51 +0000] 192.168.1.5 "GET /v1/categories HTTP/1.1" 500 (59 ms)
+[23/Jan/2020:13:56:56 +0000] 192.168.1.5 "GET /v1/categories HTTP/1.1" 200 (31 ms)
