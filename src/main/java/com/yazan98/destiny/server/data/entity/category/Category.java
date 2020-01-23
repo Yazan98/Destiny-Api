@@ -53,6 +53,12 @@ public class Category implements Serializable, VortexBaseEntity {
         this.icon = icon;
     }
 
+    public Category(@NonNull String background, @NonNull String description, List<String> images) {
+        this.background = background;
+        this.description = description;
+        this.images = images;
+    }
+
     public String getDescription() {
         return description;
     }
