@@ -21,8 +21,7 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin
 @RestController
 @RequestMapping("/v1/cities")
-class CityController @Autowired constructor(service: CityService, private val placesService: PlaceService) :
-        VortexMysqlController<City, Long, CityRepository, CityService>(service) {
+class CityController @Autowired constructor(service: CityService, private val placesService: PlaceService) : VortexMysqlController<City, Long, CityRepository, CityService>(service) {
 
     @ResponseBody
     @RequestMapping(method = [RequestMethod.GET], value = [""])
