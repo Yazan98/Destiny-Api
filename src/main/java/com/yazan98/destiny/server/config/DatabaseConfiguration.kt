@@ -1,13 +1,13 @@
 package com.yazan98.destiny.server.config
 
+import com.yazan98.destiny.server.body.RouteDetailsBody
 import com.yazan98.destiny.server.data.entity.category.Category
 import com.yazan98.destiny.server.data.entity.main.Collection
-import com.yazan98.destiny.server.data.entity.main.Route
+import com.yazan98.destiny.server.data.entity.main.route.Route
+import com.yazan98.destiny.server.data.entity.main.route.RouteDetails
+import com.yazan98.destiny.server.data.entity.main.route.RouteStory
 import com.yazan98.destiny.server.data.entity.user.Profile
-import com.yazan98.destiny.server.data.repository.CategoryRepository
-import com.yazan98.destiny.server.data.repository.CollectionRepository
-import com.yazan98.destiny.server.data.repository.ProfileRepository
-import com.yazan98.destiny.server.data.repository.RouteRepository
+import com.yazan98.destiny.server.data.repository.*
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
@@ -17,7 +17,9 @@ open class DatabaseConfiguration @Autowired constructor(
         userRepository: ProfileRepository,
         collectionRepository: CollectionRepository,
         categoryRepository: CategoryRepository,
-        routsRepository: RouteRepository
+        routsRepository: RouteRepository,
+        detailsRepository: RouteDetailsRepository,
+        routeStoryRepository: RouteStoryRepository
 ) {
 
     init {
@@ -122,13 +124,41 @@ open class DatabaseConfiguration @Autowired constructor(
                 ""
         ))
 
-        routsRepository.save(Route(
+        val route = routsRepository.save(Route(
                 "https://firebasestorage.googleapis.com/v0/b/culttrip-7da07.appspot.com/o/routs%2FNew%20Project%20(4).jpg?alt=media&token=470867d1-75f9-4cf0-aa0f-c0f134ee7ab3",
                 "Jordan",
                 154,
                 ""
         ))
 
+        val details = RouteDetailsBody(getFirstStories(route.id), getRouteDetails(route.id))
+        details.stories.forEach { routeStoryRepository.save(it) }
+        println("The Result is : ${details.stories}")
+        println("The Result is : ${details.details.toString()}")
+        detailsRepository.save(details.details)
+    }
+
+    private fun getFirstStories(id: Long): List<RouteStory> {
+        val result = RouteStory()
+        result.description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry"
+        result.name = "The Painting's Provenance and Fate"
+        result.isOnline = true
+        result.routeId = id
+        result.image = "The Image Url Here"
+        return arrayListOf(result, result, result, result, result, result)
+    }
+
+    private fun getRouteDetails(id: Long): RouteDetails {
+        val result = RouteDetails()
+        result.background = "Background Image Here"
+        result.fullDescription = "Lorem Ipsum is typesetting, Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"
+        result.icon = "Icon Image Here"
+        result.location = "Jordan , Aqaba"
+        result.rating = 5.0F
+        result.shortDescription = "Too Many Places"
+        result.name = "Jordan, Aqaba"
+        result.routeId = id
+        return result
     }
 
 }

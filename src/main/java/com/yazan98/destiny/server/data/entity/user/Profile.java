@@ -1,6 +1,7 @@
 package com.yazan98.destiny.server.data.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.yazan98.destiny.server.data.entity.main.route.RouteComments;
 import io.vortex.spring.boot.base.models.database.VortexBaseEntity;
 import io.vortex.spring.boot.base.models.database.VortexMysqlEntity;
 import lombok.NonNull;
@@ -73,6 +74,9 @@ public class Profile implements UserDetails, Serializable, VortexBaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileLocation location;
+
+    @OneToOne
+    private RouteComments comments;
 
     public Profile() {
 

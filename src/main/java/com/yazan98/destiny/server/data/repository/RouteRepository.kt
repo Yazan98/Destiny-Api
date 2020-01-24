@@ -1,6 +1,6 @@
 package com.yazan98.destiny.server.data.repository
 
-import com.yazan98.destiny.server.data.entity.main.Route
+import com.yazan98.destiny.server.data.entity.main.route.Route
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 
@@ -11,5 +11,5 @@ import org.springframework.stereotype.Repository
  */
 
 @Repository
-interface RouteRepository : JpaRepository<Route , Long> {
+interface RouteRepository : JpaRepository<Route, Long> {
 }

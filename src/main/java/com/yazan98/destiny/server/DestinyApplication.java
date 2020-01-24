@@ -5,16 +5,11 @@ import org.jsondoc.spring.boot.starter.EnableJSONDoc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
-import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-@EnableHystrix
-@EnableCircuitBreaker
 @SpringBootApplication
-@EnableJSONDoc
 @EntityScan("com.yazan98.destiny.server.data.entity")
 public class DestinyApplication {
 
