@@ -16,25 +16,25 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/v1/address")
-class AddressController @Autowired constructor(service: AddressService) :
+class ProfileAddressController @Autowired constructor(service: AddressService) :
         VortexMysqlController<Address, Long, AddressRepository, AddressService>(service) {
 
-    @ResponseBody
-    @RequestMapping(method = [RequestMethod.POST], value = [""])
-    fun saveAddressByUserId(@Valid @RequestBody content: AddressUser?): ResponseEntity<VortexResponse> {
-        if (content == null) {
-            throw VortexInvalidValueException("Body Required", BodyErrorDetails(
-                    "Body Not Attached",
-                    "Create Request"
-            ))
-        } else {
-            val result = getService().createByUserId(content)
-            return ResponseEntity.status(HttpStatus.CREATED).body(VortexSuccessResponse(
-                    code = HttpStatus.CREATED.value(),
-                    message = "Data Saved",
-                    data = result
-            ))
-        }
-    }
+//    @ResponseBody
+//    @RequestMapping(method = [RequestMethod.POST], value = [""])
+//    fun saveAddressByUserId(@Valid @RequestBody content: AddressUser?): ResponseEntity<VortexResponse> {
+//        if (content == null) {
+//            throw VortexInvalidValueException("Body Required", BodyErrorDetails(
+//                    "Body Not Attached",
+//                    "Create Request"
+//            ))
+//        } else {
+//            val result = getService().createByUserId(content)
+//            return ResponseEntity.status(HttpStatus.CREATED).body(VortexSuccessResponse(
+//                    code = HttpStatus.CREATED.value(),
+//                    message = "Data Saved",
+//                    data = result
+//            ))
+//        }
+//    }
 
 }

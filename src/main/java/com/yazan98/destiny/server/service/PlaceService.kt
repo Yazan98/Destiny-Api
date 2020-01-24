@@ -21,9 +21,9 @@ open class PlaceService @Autowired constructor(private val repo: PlaceRepository
         return getEntityById(entity.id)
     }
 
-    fun getAllByCategoryId(id: Long): ArrayList<Place> {
-        return getRepository().findAllByCategoryId(id) as ArrayList<Place>
-    }
+//    fun getAllByCategoryId(id: Long): ArrayList<Place> {
+//        return getRepository().findAllByCategoryId(id) as ArrayList<Place>
+//    }
 
     fun getAllByCityId(id: Long): ArrayList<Place> {
         return getRepository().findAllByCityId(id) as ArrayList<Place>

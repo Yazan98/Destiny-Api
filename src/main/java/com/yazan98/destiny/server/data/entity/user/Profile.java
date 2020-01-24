@@ -1,7 +1,6 @@
 package com.yazan98.destiny.server.data.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yazan98.destiny.server.data.entity.place.route.RouteComments;
 import io.vortex.spring.boot.base.models.database.VortexBaseEntity;
 import lombok.NonNull;
 import javax.persistence.Id;
@@ -72,9 +71,6 @@ public class Profile implements UserDetails, Serializable, VortexBaseEntity {
 
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileLocation location;
-
-    @OneToOne
-    private RouteComments comments;
 
     public Profile() {
 

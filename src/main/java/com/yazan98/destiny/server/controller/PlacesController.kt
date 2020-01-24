@@ -21,19 +21,19 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/v1/places")
 class PlacesController @Autowired constructor(service: PlaceService) :
         VortexMysqlController<Place, Long, PlaceRepository, PlaceService>(service) {
-
-    @ResponseBody
-    @RequestMapping(method = [RequestMethod.GET], value = [""])
-    fun getPlacesByCategoryId(@RequestParam("categoryId") id: Long): ResponseEntity<VortexResponse> {
-        val result = getService().getAllByCategoryId(id)
-        return ResponseEntity.status(HttpStatus.OK).body(VortexListResponse(
-                code = HttpStatus.OK.value(),
-                data = result,
-                message = "Data Found",
-                status = "Success",
-                size = result.size
-        ))
-    }
+//
+//    @ResponseBody
+//    @RequestMapping(method = [RequestMethod.GET], value = [""])
+//    fun getPlacesByCategoryId(@RequestParam("categoryId") id: Long): ResponseEntity<VortexResponse> {
+//        val result = getService().getAllByCategoryId(id)
+//        return ResponseEntity.status(HttpStatus.OK).body(VortexListResponse(
+//                code = HttpStatus.OK.value(),
+//                data = result,
+//                message = "Data Found",
+//                status = "Success",
+//                size = result.size
+//        ))
+//    }
 
     @ResponseBody
     @RequestMapping(method = [RequestMethod.GET], value = ["/all"])

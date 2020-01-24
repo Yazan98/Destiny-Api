@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository
 @Repository
 interface PlaceRepository : JpaRepository<Place , Long> {
 
-    fun findAllByCategoryId(categoryId: Long): List<Place>
+//    fun findAllByCategoryId(categoryId: Long): List<Place>
 
     fun findAllByCityId(cityId: Long): List<Place>
 
