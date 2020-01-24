@@ -6,6 +6,7 @@ import com.yazan98.destiny.server.data.entity.main.route.RouteComments
 import com.yazan98.destiny.server.data.repository.RouteDetailsRepository
 import com.yazan98.destiny.server.data.repository.RouteRepository
 import com.yazan98.destiny.server.data.repository.RouteStoryRepository
+import com.yazan98.destiny.server.response.RouteDetailsResponse
 import com.yazan98.destiny.server.service.RouteService
 import io.vortex.spring.boot.base.response.VortexListResponse
 import io.vortex.spring.boot.base.response.VortexResponse
@@ -83,12 +84,24 @@ class RouteController @Autowired constructor(service: RouteService, private val 
     @ResponseBody
     @RequestMapping(method = [RequestMethod.GET], value = ["/{id}/details"])
     fun getDetailsByRouteId(@PathVariable("id") id: Long): ResponseEntity<VortexResponse> {
-        println("Request : The Id is : ${id}")
+        val result = getService().getRouteDetailsByRouteId(id, detailsRepo, storyRepo)
         return ResponseEntity.status(HttpStatus.OK).body(VortexSuccessResponse(
                 HttpStatus.OK.value(),
                 "Data Found",
                 "Success",
-                getService().getRouteDetailsByRouteId(id, detailsRepo, storyRepo)
+                RouteDetailsResponse(
+                        result.route.id,
+                        result.route.name,
+                        result.route.image,
+                        result.details.routeId,
+                        result.details.shortDescription,
+                        result.details.fullDescription,
+                        result.details.rating,
+                        result.details.icon,
+                        result.details.background,
+                        result.details.location,
+                        result.stories
+                )
         ))
     }
 

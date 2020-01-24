@@ -9,3 +9,17 @@ data class RouteResponse(
         val details: RouteDetails,
         val stories: List<RouteStory>
 )
+
+data class RouteDetailsResponse(
+        val id: Long,
+        val name: String,
+        val image: String,
+        val routeId: Long,
+        val shortDescription: String,
+        val description: String,
+        val rating: Float,
+        val icon: String,
+        val background: String,
+        val location: String,
+        val stories: List<RouteStory>
+)
