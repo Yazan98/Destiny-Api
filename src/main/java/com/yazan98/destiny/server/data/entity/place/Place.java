@@ -1,4 +1,4 @@
-package com.yazan98.destiny.server.data.entity.main;
+package com.yazan98.destiny.server.data.entity.place;
 
 import io.vortex.spring.boot.base.models.database.VortexBaseEntity;
 import lombok.NonNull;

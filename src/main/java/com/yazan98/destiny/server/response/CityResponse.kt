@@ -1,7 +1,7 @@
 package com.yazan98.destiny.server.response
 
 import com.yazan98.destiny.server.data.entity.City
-import com.yazan98.destiny.server.data.entity.main.Place
+import com.yazan98.destiny.server.data.entity.place.Place
 
 /**
  * Created By : Yazan Tarifi

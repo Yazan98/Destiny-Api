@@ -1,9 +1,8 @@
 package com.yazan98.destiny.server.data.entity.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.yazan98.destiny.server.data.entity.main.route.RouteComments;
+import com.yazan98.destiny.server.data.entity.place.route.RouteComments;
 import io.vortex.spring.boot.base.models.database.VortexBaseEntity;
-import io.vortex.spring.boot.base.models.database.VortexMysqlEntity;
 import lombok.NonNull;
 import javax.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +16,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.UUID;
 
 import static java.util.stream.Collectors.toList;
 

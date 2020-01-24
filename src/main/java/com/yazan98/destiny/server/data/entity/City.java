@@ -30,18 +30,13 @@ public class City implements Serializable , VortexBaseEntity {
     @Column(name = "name")
     private String name;
 
-    @NonNull
-    @Column(name = "places")
-    private Long places;
-
     public City() {
 
     }
 
-    public City(@NonNull String image, @NonNull String name, @NonNull Long places) {
+    public City(@NonNull String image, @NonNull String name) {
         this.image = image;
         this.name = name;
-        this.places = places;
     }
 
     public Long getId() {
@@ -68,11 +63,4 @@ public class City implements Serializable , VortexBaseEntity {
         this.name = name;
     }
 
-    public Long getPlaces() {
-        return places;
-    }
-
-    public void setPlaces(Long places) {
-        this.places = places;
-    }
 }

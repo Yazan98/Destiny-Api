@@ -1,6 +1,6 @@
 package com.yazan98.destiny.server.controller
 
-import com.yazan98.destiny.server.data.entity.main.Place
+import com.yazan98.destiny.server.data.entity.place.Place
 import com.yazan98.destiny.server.data.repository.PlaceRepository
 import com.yazan98.destiny.server.service.PlaceService
 import io.vortex.spring.boot.base.response.VortexListResponse

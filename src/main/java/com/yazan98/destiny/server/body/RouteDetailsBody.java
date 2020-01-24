@@ -1,7 +1,7 @@
 package com.yazan98.destiny.server.body;
 
-import com.yazan98.destiny.server.data.entity.main.route.RouteDetails;
-import com.yazan98.destiny.server.data.entity.main.route.RouteStory;
+import com.yazan98.destiny.server.data.entity.place.route.RouteDetails;
+import com.yazan98.destiny.server.data.entity.place.route.RouteStory;
 
 import java.util.List;
 

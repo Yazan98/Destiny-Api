@@ -1,7 +1,5 @@
-package com.yazan98.destiny.server.data.entity.main;
+package com.yazan98.destiny.server.data.entity.place;
 
-import com.google.common.base.Ticker;
-import com.yazan98.destiny.server.data.entity.Ticket;
 import lombok.NonNull;
 
 import javax.persistence.*;

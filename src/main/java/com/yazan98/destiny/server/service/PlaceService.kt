@@ -1,6 +1,6 @@
 package com.yazan98.destiny.server.service
 
-import com.yazan98.destiny.server.data.entity.main.Place
+import com.yazan98.destiny.server.data.entity.place.Place
 import com.yazan98.destiny.server.data.repository.PlaceRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
