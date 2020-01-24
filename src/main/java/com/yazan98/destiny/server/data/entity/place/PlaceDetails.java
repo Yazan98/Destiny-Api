@@ -32,7 +32,7 @@ public class PlaceDetails {
     private Place place;
 
     @OneToOne
-    private Ticket ticket;
+    private Address address;
 
     public PlaceDetails() {
 
