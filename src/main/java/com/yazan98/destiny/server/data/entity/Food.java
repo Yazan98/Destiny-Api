@@ -61,7 +61,7 @@ public class Food extends VortexMysqlEntity implements Serializable {
     private String numberOfPieces;
 
     @NonNull
-    @Column(name = "is_popular")
+    @Column(name = "popular")
     private boolean isPopular;
 
     @NonNull

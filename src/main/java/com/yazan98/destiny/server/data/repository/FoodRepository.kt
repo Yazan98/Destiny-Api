@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository
 
 @Repository
 interface FoodRepository : JpaRepository<Food, Long> {
+
+    fun findAllByIsPopular(popular: Boolean): List<Food>
+
+    fun findAllByCategoryId(id: Long): List<Food>
+
 }

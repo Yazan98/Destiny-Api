@@ -16,6 +16,14 @@ open class FoodService @Autowired constructor(private val repo: FoodRepository) 
         return repo
     }
 
+    fun getAllRecipesPopular(status: Boolean): List<Food> {
+        return getRepository().findAllByIsPopular(status)
+    }
+
+    fun getByCategoryId(id: Long): List<Food> {
+        return getRepository().findAllByCategoryId(id)
+    }
+
     override fun update(entity: Food): Food {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
