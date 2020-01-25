@@ -19,23 +19,23 @@ open class CategoryConfig @Autowired constructor(placesController: CategoryContr
         return arrayListOf(
                 Category(
                         "Steak",
-                        "https://firebasestorage.googleapis.com/v0/b/destiny-51653.appspot.com/o/icons%2FNew%20Project.png?alt=media&token=04a43f17-37ad-4ab8-9011-07dfc2b189f5"
+                        "https://images.unsplash.com/photo-1542365887-1149961dccc7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
                 ),
                 Category(
                         "Shrimp",
-                        "https://firebasestorage.googleapis.com/v0/b/destiny-51653.appspot.com/o/icons%2FNew%20Project%20(1).png?alt=media&token=532779f6-1b28-4235-bfcd-0e309daeba58"
+                        "https://images.unsplash.com/photo-1565511224465-3948cfdd6d2a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80"
                 ),
                 Category(
                         "Ham",
-                        "https://firebasestorage.googleapis.com/v0/b/destiny-51653.appspot.com/o/icons%2FNew%20Project%20(2).png?alt=media&token=b9326d8d-b715-4a61-a2f6-63abd80e3a64"
+                        "https://images.unsplash.com/photo-1558888565-86add11fa452?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
                 ),
                 Category(
                         "Fish",
-                        "https://firebasestorage.googleapis.com/v0/b/destiny-51653.appspot.com/o/icons%2FNew%20Project%20(3).png?alt=media&token=50649750-a732-4da2-8a64-2c2f47f41638"
+                        "https://images.unsplash.com/photo-1534948216015-843149f72be3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
                 ),
                 Category(
                         "Sushi",
-                        "https://firebasestorage.googleapis.com/v0/b/destiny-51653.appspot.com/o/icons%2FNew%20Project%20(4).png?alt=media&token=8e3d173f-9b90-4147-b447-fb4d32bcce9c"
+                        "https://images.unsplash.com/photo-1553621042-f6e147245754?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=925&q=80"
                 )
         )
     }

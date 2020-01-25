@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "foods")
-public class Food extends VortexMysqlEntity implements Serializable {
+public class Recipe extends VortexMysqlEntity implements Serializable {
 
     @Id
     @NonNull
@@ -68,12 +68,12 @@ public class Food extends VortexMysqlEntity implements Serializable {
     @Column(name = "categoryId")
     private Long categoryId = 1L;
 
-    public Food() {
+    public Recipe() {
 
     }
 
-    public Food(String name, String image, String description, Double price, boolean isPromoted, Float rating,
-                Long votes, String time, String gms, String fullDescription, String numberOfPieces, boolean isPopular, Long id) {
+    public Recipe(String name, String image, String description, Double price, boolean isPromoted, Float rating,
+                  Long votes, String time, String gms, String fullDescription, String numberOfPieces, boolean isPopular, Long id) {
         this.name = name;
         this.image = image;
         this.description = description;
