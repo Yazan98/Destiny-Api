@@ -1,6 +1,7 @@
 package com.yazan98.destiny.server.config.entity
 
 import com.yazan98.destiny.server.controller.CategoryController
+import com.yazan98.destiny.server.controller.FoodController
 import com.yazan98.destiny.server.data.entity.category.Category
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Configuration

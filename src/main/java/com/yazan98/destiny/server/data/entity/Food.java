@@ -64,11 +64,16 @@ public class Food extends VortexMysqlEntity implements Serializable {
     @Column(name = "is_popular")
     private boolean isPopular;
 
+    @NonNull
+    @Column(name = "categoryId")
+    private Long categoryId = 1L;
+
     public Food() {
 
     }
 
-    public Food(String name, String image, String description, Double price, boolean isPromoted, Float rating, Long votes, String time, String gms, String fullDescription, String numberOfPieces, boolean isPopular) {
+    public Food(String name, String image, String description, Double price, boolean isPromoted, Float rating,
+                Long votes, String time, String gms, String fullDescription, String numberOfPieces, boolean isPopular, Long id) {
         this.name = name;
         this.image = image;
         this.description = description;
@@ -81,6 +86,15 @@ public class Food extends VortexMysqlEntity implements Serializable {
         this.fullDescription = fullDescription;
         this.numberOfPieces = numberOfPieces;
         this.isPopular = isPopular;
+        categoryId = id;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Long getId() {
