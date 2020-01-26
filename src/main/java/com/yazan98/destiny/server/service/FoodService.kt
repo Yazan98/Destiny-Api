@@ -25,7 +25,7 @@ open class FoodService @Autowired constructor(private val repo: FoodRepository) 
             commentsRepository: RecipeCommentsRepository
     ): RecipeComment {
         val profile = profileService.getEntityById(newComment.profileId)
-        return commentsRepository.save(RecipeComment(newComment.comment, profile, newComment.recipeId))
+        return commentsRepository.save(RecipeComment(newComment.comment, profile, newComment.recipeId, newComment.profileId))
     }
 
     fun getAllRecipesPopular(status: Boolean): List<Recipe> {

@@ -6,6 +6,10 @@ public class RecipeCommentBody {
     private String comment;
     private Long recipeId;
 
+    public RecipeCommentBody() {
+
+    }
+
     public RecipeCommentBody(Long profileId, String comment, Long recipeId) {
         this.profileId = profileId;
         this.comment = comment;

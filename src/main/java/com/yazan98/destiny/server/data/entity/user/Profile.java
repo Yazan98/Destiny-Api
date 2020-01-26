@@ -73,8 +73,8 @@ public class Profile implements UserDetails, Serializable, VortexBaseEntity {
     @OneToOne(cascade = CascadeType.ALL)
     private ProfileLocation location;
 
-    @OneToOne
-    private RecipeComment comment;
+//    @OneToOne()
+//    private RecipeComment comment;
 
     public Profile() {
 

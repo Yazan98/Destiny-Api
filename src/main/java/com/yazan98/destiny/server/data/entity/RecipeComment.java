@@ -19,8 +19,9 @@ public class RecipeComment implements Serializable {
     @Column(name = "comment")
     private String comment;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    private Profile profile;
+    private String name;
+    private String image;
+    private Long profileId;
 
     @NonNull
     @Column(name = "recipe_id")
@@ -30,9 +31,11 @@ public class RecipeComment implements Serializable {
 
     }
 
-    public RecipeComment(String comment, Profile profileId, Long recipeId) {
+    public RecipeComment(String comment, Profile profileId, Long recipeId, Long profileIdD) {
         this.comment = comment;
-        this.profile = profileId;
+        this.profileId = profileIdD;
+        this.image = profileId.getImage();
+        this.name = profileId.getName();
         this.recipeId = recipeId;
     }
 
@@ -52,12 +55,16 @@ public class RecipeComment implements Serializable {
         this.comment = comment;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public Long getProfileId() {
+        return profileId;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public String getName() {
+        return name;
+    }
+
+    public String getImage() {
+        return image;
     }
 
     public Long getRecipeId() {
