@@ -59,7 +59,7 @@ open class RecipesConfig @Autowired constructor(foodService: FoodService, commen
                                 "AA", true,
                                 "https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80",
                                 "123456789"),
-                        7
+                        7,54
                 ),
                 RecipeComment(
                         "This Recipe Is Awesome :D",
@@ -67,7 +67,7 @@ open class RecipesConfig @Autowired constructor(foodService: FoodService, commen
                                 "AA", true,
                                 "https://images.unsplash.com/photo-1529665253569-6d01c0eaf7b6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=976&q=80",
                                 "123456789"),
-                        7
+                        7,54
                 ),
                 RecipeComment(
                         "Good Recipe :D",
@@ -75,7 +75,7 @@ open class RecipesConfig @Autowired constructor(foodService: FoodService, commen
                                 "AA", true,
                                 "https://images.unsplash.com/photo-1497316730643-415fac54a2af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=700&q=80",
                                 "123456789"),
-                        7
+                        7,54
                 )
         )
     }
