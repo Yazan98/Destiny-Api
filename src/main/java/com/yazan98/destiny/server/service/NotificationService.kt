@@ -1,11 +1,7 @@
 package com.yazan98.destiny.server.service
 
-import com.google.firebase.FirebaseApp
-import com.google.firebase.messaging.AndroidConfig
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.Message
+import com.google.firebase.messaging.*
 import com.yazan98.destiny.server.body.OfferBody
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -18,23 +14,24 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional
-open class NotificationService @Autowired constructor(private val firebase: FirebaseApp) {
+open class NotificationService {
 
     fun createNewOffer(body: OfferBody): String {
         val message = Message.builder()
                 .putData("title", body.title)
                 .putData("body", body.body)
-                .setAndroidConfig(getAndroidConfiguration())
                 .setTopic("app_offers")
+                .setAndroidConfig(getAndroidConfiguration(body.title, body.body))
+                .setNotification(Notification(body.title, body.body))
                 .build()
         val response = FirebaseMessaging.getInstance().send(message)
         println("Successfully sent message: $response")
         return response
     }
 
-    private fun getAndroidConfiguration(): AndroidConfig? {
+    private fun getAndroidConfiguration(title: String, body: String): AndroidConfig? {
         return AndroidConfig.builder()
-                .setRestrictedPackageName("com.destiny.services")
+                .setNotification(AndroidNotification.builder().setBody(body).setTitle(title).setPriority(AndroidNotification.Priority.HIGH).build())
                 .setPriority(AndroidConfig.Priority.HIGH)
                 .build()
     }
