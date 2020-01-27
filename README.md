@@ -33,6 +33,9 @@ This Api is For Restaurant Application With The Following Apis and the Frontend 
 1. Heroku Base Url :  https://destiny98.herokuapp.com/v1/**
 2. Docker Image : https://hub.docker.com/repository/docker/yt98/destiny_api/general
 
+#### Postman Collection
+[Link](https://github.com/Yazan98/Destiny-Api/blob/master/Destiny%20Api.postman_collection.json)
+
 #### Success Response
 ```
 {

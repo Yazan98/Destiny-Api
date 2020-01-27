@@ -79,3 +79,5 @@
 [27/Jan/2020:13:50:11 +0000] 192.168.1.4 "GET /v1/recipes/17 HTTP/1.1" 200 (66 ms)
 [27/Jan/2020:13:50:39 +0000] 192.168.1.4 "GET /v1/recipes/category/1 HTTP/1.1" 200 (90 ms)
 [27/Jan/2020:14:04:32 +0000] 192.168.1.4 "POST /v1/notifications/offer HTTP/1.1" 200 (1147 ms)
+[27/Jan/2020:14:29:56 +0000] 192.168.1.3 "POST /v1/accounts/register HTTP/1.1" 200 (491 ms)
+[27/Jan/2020:14:30:23 +0000] 192.168.1.3 "POST /v1/accounts/register HTTP/1.1" 400 (48 ms)
