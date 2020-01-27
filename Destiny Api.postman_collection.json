@@ -1,0 +1,667 @@
+{
+	"info": {
+		"_postman_id": "0111bd11-4c58-48c7-8342-5768f0f09b94",
+		"name": "Destiny Api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login Request",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"yazan@gmail.com\",\n\t\"password\": \"123456789\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"login"
+							]
+						},
+						"description": "Login With Email , Password"
+					},
+					"response": []
+				},
+				{
+					"name": "Register Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Yt989ef8\",\n\t\"password\" : \"123456789\",\n\t\"email\" : \"yazandfsefi7@yahoo.com\",\n\t\"enabled\": false,\n\t\"image\": \"image url\",\n\t\"phoneNumber\" : \"123456789\",\n\t\"pinCode\": \"1234\",\n\t\"location\": {\n\t\t\"name\": \"Amman\",\n\t\t\"latitude\": 0.0,\n\t\t\"longitude\": 0.0\n\t}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/{id}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"{id}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Activate Account",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"pinCode\": \"1234\",\n\t\"userId\": 1\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/validate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"validate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OTgiLCJuYW1lIjoiWXQ5ODk4IiwiaWQiOjc3LCJleHAiOjE1Nzc4OTk1MjksImlhdCI6MTU3Nzg4MTUyOSwic3RhdHVzIjoiTk9UX0FDVElWQVRFRCJ9.L1R1-qbKyQ388VC4BIUM2IE--UW-SgLvJViJcvD5ZvQ",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"oldPassword\":\"123456789\",\n\t\"newPassword\":\"Yazan159\",\n\t\"id\":77\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OTgiLCJuYW1lIjoiWXQ5ODk4IiwiaWQiOjc3LCJleHAiOjE1Nzc4OTk1MjksImlhdCI6MTU3Nzg4MTUyOSwic3RhdHVzIjoiTk9UX0FDVElWQVRFRCJ9.L1R1-qbKyQ388VC4BIUM2IE--UW-SgLvJViJcvD5ZvQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/accounts/77",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"accounts",
+								"77"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZYXogaGUgcmlmaSIsImV4cCI6MTU3Nzg5MTYxNSwiaWF0IjoxNTc3ODczNjE1fQ.GuwEQwtI9CERII6HksgLMA7cjv3y0uzwSvKApd3WW7g",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"name\",\n\t\"icon\": \"category Image\",\n\t\"background\": \"background image\",\n\t\"description\" : \"Short Description About Category\",\n\t\"images\": [\n\t\t\"Image Url 1\",\t\n\t\t\"Image Url 2\",\t\n\t\t\"Image Url 3\",\t\n\t\t\"Image Url 4\",\t\n\t\t\"Image Url 5\",\t\n\t\t\"Image Url 6\",\t\n\t\t\"Image Url 7\"\n\t]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Categories",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OWVra2Y4IiwibmFtZSI6Ill0OTg5ZWtrZjgiLCJpZCI6MTIsImV4cCI6MTU3OTg4ODg4OSwiaWF0IjoxNTc5ODcwODg5LCJzdGF0dXMiOiJOT1RfQUNUSVZBVEVEIn0.4llsKPYiB15jCQutt-zN1Tg9uYBtMMFjsIb6Bdmkxco",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/categories",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Category By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZYXogaGVpZmkiLCJuYW1lIjoiWWF6IGhlaWZpIiwiaWQiOjU2LCJleHAiOjE1Nzc4OTIxMjcsImlhdCI6MTU3Nzg3NDEyNywic3RhdHVzIjoiTk9UX0FDVElWQVRFRCJ9.X65sHo1FGSET7HXCzybdLSxKHzJFSwiC8BZVRuQIdjY",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/categories/40",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"categories",
+								"40"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Places",
+			"item": [
+				{
+					"name": "Create New Place",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\": \"Place Name\",\n\t\"categoryId\": 2,\n\t\"image\": \"Image Url\",\n\t\"rate\": 4.2,\n\t\"rates\": 15,\n\t\"status\": \"Open\",\n\t\"km\": 15.25,\n\t\"details\": {\n\t\t\"latitude\": 0.0,\n\t\t\"longitude\": 0.0\n\t},\n\t\"cityId\": 69,\n\t\"images\": [\n\t\t\"Image Url 1\",\n\t\t\"Image Url 1\",\n\t\t\"Image Url 1\",\n\t\t\"Image Url 1\",\n\t\t\"Image Url 1\",\n\t\t\"Image Url 1\"\n\t]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/places",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"places"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Places",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/places/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"places",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Places By Category Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/places?categoryId=1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"places"
+							],
+							"query": [
+								{
+									"key": "categoryId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Place By Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZYXogaGUgcmlmaSIsImV4cCI6MTU3Nzg5MTYxNSwiaWF0IjoxNTc3ODczNjE1fQ.GuwEQwtI9CERII6HksgLMA7cjv3y0uzwSvKApd3WW7g",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/places/7",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"places",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "City",
+			"item": [
+				{
+					"name": "Create New City",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"image\": \"Image Url\",\n\t\"name\": \"City Name\",\n\t\"places\": 15\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"cities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Cities",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OWVra2Y4IiwibmFtZSI6Ill0OTg5ZWtrZjgiLCJpZCI6MTIsImV4cCI6MTU3OTg4ODg4OSwiaWF0IjoxNTc5ODcwODg5LCJzdGF0dXMiOiJOT1RfQUNUSVZBVEVEIn0.4llsKPYiB15jCQutt-zN1Tg9uYBtMMFjsIb6Bdmkxco",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"cities",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get City By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/cities?cityId=69",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"cities"
+							],
+							"query": [
+								{
+									"key": "cityId",
+									"value": "69"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Notifications",
+			"item": [
+				{
+					"name": "Create Offer Notification",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZYXplaWZpIiwibmFtZSI6IllhemVpZmkiLCJpZCI6NTksImV4cCI6MTU3Nzg5MzM1NywiaWF0IjoxNTc3ODc1MzU3LCJzdGF0dXMiOiJOT1RfQUNUSVZBVEVEIn0.nv-oLVkbVcOoMg2Hkv6jd8SnMUwOhB3LVqtUO80U708",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"title\": \"New Offer Just For You\",\n\t\"body\" : \"Some Description About The Offer\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/notifications/offer",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"notifications",
+								"offer"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Offers",
+			"item": [
+				{
+					"name": "Get All Offers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OWVra2Y4IiwibmFtZSI6Ill0OTg5ZWtrZjgiLCJpZCI6MTIsImV4cCI6MTU3OTg4ODg4OSwiaWF0IjoxNTc5ODcwODg5LCJzdGF0dXMiOiJOT1RfQUNUSVZBVEVEIn0.4llsKPYiB15jCQutt-zN1Tg9uYBtMMFjsIb6Bdmkxco",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/offers",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"offers"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Recipes",
+			"item": [
+				{
+					"name": "Get All Recipes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OWVra2Y4IiwibmFtZSI6Ill0OTg5ZWtrZjgiLCJpZCI6MzgsImV4cCI6MTU3OTk2MjIzMiwiaWF0IjoxNTc5OTQ0MjMyLCJzdGF0dXMiOiJOT1RfQUNUSVZBVEVEIn0.S2FD9_hoJa2ilHzvmWllDOSqPF5-oLPaFbUNWShR41Y",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/recipes/all",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"recipes",
+								"all"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Popular Recipes",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OWVra2Y4IiwibmFtZSI6Ill0OTg5ZWtrZjgiLCJpZCI6MzgsImV4cCI6MTU3OTk2MjIzMiwiaWF0IjoxNTc5OTQ0MjMyLCJzdGF0dXMiOiJOT1RfQUNUSVZBVEVEIn0.S2FD9_hoJa2ilHzvmWllDOSqPF5-oLPaFbUNWShR41Y",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/recipes?popular=true",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"recipes"
+							],
+							"query": [
+								{
+									"key": "popular",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Recipes By Category Id",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJZdDk4OWVra2Y4IiwibmFtZSI6Ill0OTg5ZWtrZjgiLCJpZCI6MzgsImV4cCI6MTU3OTk2MjYyNywiaWF0IjoxNTc5OTQ0NjI3LCJzdGF0dXMiOiJOT1RfQUNUSVZBVEVEIn0.4J3U5haDglsJTFyJ6f_qpnA9byHQUCUBxaaf9Yy7WjE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/recipes/category/1",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"recipes",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add New Comment",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Comments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
