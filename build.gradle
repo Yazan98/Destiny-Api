@@ -218,10 +218,6 @@ heroku {
     jdkVersion = 8
 }
 
-bootJar {
-    mainClassName = 'Destiny.App'
-}
-
 jar {
     enabled = true
 }
